@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyString
+  capacity: 1
+  enabled: 2021-08-29 14:12:47
+  church: one
+
+two:
+  name: MyString
+  address: MyString
+  capacity: 1
+  enabled: 2021-08-29 14:12:47
+  church: two
