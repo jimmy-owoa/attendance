@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: one
+  member: one
+  temperature: 1.5
+
+two:
+  event: two
+  member: two
+  temperature: 1.5
