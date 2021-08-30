@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       end
       resources :church_annexes
       resources :churches
+      resources :members
+      resources :events
     end
   end
 end

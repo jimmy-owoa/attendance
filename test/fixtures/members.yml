@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  lastname: MyString
+  phone: MyString
+  legal_number: MyString
+  enabled: 2021-08-29 14:41:41
+  church: one
+  church_annex: one
+
+two:
+  name: MyString
+  lastname: MyString
+  phone: MyString
+  legal_number: MyString
+  enabled: 2021-08-29 14:41:41
+  church: two
+  church_annex: two

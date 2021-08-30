@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_29_181247) do
+ActiveRecord::Schema.define(version: 2021_08_29_184141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,34 @@ ActiveRecord::Schema.define(version: 2021_08_29_181247) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.integer "event_type"
+    t.text "description"
+    t.bigint "church_annex_id", null: false
+    t.integer "offering"
+    t.datetime "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["church_annex_id"], name: "index_events_on_church_annex_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string "name"
+    t.string "lastname"
+    t.string "email"
+    t.string "phone"
+    t.string "legal_number"
+    t.datetime "enabled"
+    t.bigint "church_id", null: false
+    t.bigint "church_annex_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["church_annex_id"], name: "index_members_on_church_annex_id"
+    t.index ["church_id"], name: "index_members_on_church_id"
+    t.index ["legal_number"], name: "index_members_on_legal_number"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "lastname"
@@ -44,4 +72,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_181247) do
   end
 
   add_foreign_key "church_annexes", "churches"
+  add_foreign_key "events", "church_annexes"
+  add_foreign_key "members", "church_annexes"
+  add_foreign_key "members", "churches"
 end
