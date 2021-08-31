@@ -4,7 +4,7 @@
 # Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin AJAX requests.
 
 # Read more: https://github.com/cyu/rack-cors
-TARGET_URL = ENV["FRONT_URL"] || "http://localhost:54323"
+TARGET_URL = ENV["FRONT_URL"] || "http://localhost:53354"
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do

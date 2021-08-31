@@ -1,4 +1,4 @@
-class Assistant < ApplicationRecord
+class Attendee < ApplicationRecord
   belongs_to :event
   belongs_to :member
 end
