@@ -1,12 +1,24 @@
 module Api
   class V1::ChurchAnnexesController < V1Controller
-    before_action :set_church_annex, only: [:show, :update, :destroy]
+    before_action :set_church_annex, only: [:show, :update, :destroy, :events, :event]
 
     # GET /church_annexes
     def index
       @church_annexes = ChurchAnnex.all
 
       render json: @church_annexes
+    end
+
+    def events 
+      events = @church_annex.try(:events)
+
+      render json: events
+    end
+
+    def event
+      event = @church_annex.events.find(params[:id])
+
+      render json: event
     end
 
     # GET /church_annexes/1
@@ -43,12 +55,12 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_church_annex
-      @church_annex = ChurchAnnex.find(params[:id])
+      @church_annex = ChurchAnnex.find_by(slug: params[:slug])
     end
 
     # Only allow a list of trusted parameters through.
     def church_annex_params
-      params.require(:church_annex).permit(:name, :address, :capacity, :enabled, :church_id)
+      params.require(:church_annex).permit(:name, :address, :capacity, :enabled, :church_id, :slug)
     end
   end
 end

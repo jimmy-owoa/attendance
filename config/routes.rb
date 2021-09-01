@@ -7,7 +7,10 @@ Rails.application.routes.draw do
         resource :current_user, only: :show
         post '/login', to: 'authentications#create'
       end
-      resources :church_annexes
+      resources :church_annexes, param: :slug do
+        get :events, to: "church_annexes#events", on: :member
+        get "events/:id", to: "church_annexes#event", on: :member
+      end
       resources :churches
       resources :members
       resources :events
