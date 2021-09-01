@@ -27,7 +27,7 @@ gem 'jwt'
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
-
+gem 'pry'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :attendees
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
@@ -12,6 +11,8 @@ Rails.application.routes.draw do
       resources :churches
       resources :members
       resources :events
+      resources :attendees
+      post "members/search", to: "members#search"
     end
   end
 end

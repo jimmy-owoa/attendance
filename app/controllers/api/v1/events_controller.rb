@@ -4,7 +4,7 @@ module Api
 
     # GET /events
     def index
-      @events = Event.all
+      @events = ChurchAnnex.find_by(slug: params[:slug]).try(:events)
 
       render json: @events
     end

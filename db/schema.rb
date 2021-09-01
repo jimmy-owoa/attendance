@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_08_31_041826) do
   create_table "church_annexes", force: :cascade do |t|
     t.string "name"
     t.string "address"
+    t.string "slug"
     t.integer "capacity"
     t.datetime "enabled"
     t.bigint "church_id", null: false
@@ -56,21 +57,13 @@ ActiveRecord::Schema.define(version: 2021_08_31_041826) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "name"
-    t.string "lastname"
-    t.string "email"
-    t.string "phone"
-    t.string "legal_number"
-    t.datetime "enabled"
-    t.bigint "church_id", null: false
+    t.datetime "admin_at"
+    t.datetime "deleted_at"
+    t.bigint "user_id", null: false
     t.bigint "church_annex_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.datetime "is_admin"
     t.index ["church_annex_id"], name: "index_members_on_church_annex_id"
-    t.index ["church_id"], name: "index_members_on_church_id"
-    t.index ["legal_number"], name: "index_members_on_legal_number"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
@@ -79,6 +72,9 @@ ActiveRecord::Schema.define(version: 2021_08_31_041826) do
     t.string "lastname"
     t.string "email", null: false
     t.string "password_digest"
+    t.string "phone"
+    t.string "legal_number"
+    t.datetime "enabled"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -89,6 +85,5 @@ ActiveRecord::Schema.define(version: 2021_08_31_041826) do
   add_foreign_key "church_annexes", "churches"
   add_foreign_key "events", "church_annexes"
   add_foreign_key "members", "church_annexes"
-  add_foreign_key "members", "churches"
   add_foreign_key "members", "users"
 end

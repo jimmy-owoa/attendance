@@ -9,6 +9,10 @@ module Api
       render json: @members
     end
 
+    def search
+      binding.pry
+    end
+
     # GET /members/1
     def show
       render json: @member
