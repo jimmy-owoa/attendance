@@ -9,7 +9,11 @@ Rails.application.routes.draw do
       end
       resources :church_annexes, param: :slug do
         get :events, to: "church_annexes#events", on: :member
+        get :members, to: "church_annexes#members", on: :member
         get "events/:id", to: "church_annexes#event", on: :member
+        get "events/:id/attendees", to: "church_annexes#attendees", on: :member
+        get "events/:id/event_members", to: "church_annexes#event_members", on: :member
+        post "events/:id/register_attendee", to: "church_annexes#register_attendee", on: :member
       end
       resources :churches
       resources :members
