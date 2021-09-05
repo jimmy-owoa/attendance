@@ -11,15 +11,31 @@ module Api
     end
 
     def events 
-      events = @church_annex.try(:events)
-
-      render json: events
+      data = []
+      events = @church_annex.events
+      events.each do |event|
+        data << {
+          id: event.id,
+          name: event.name,
+          event_type: event.event_type,
+          date: I18n.l(event.date, format: :long)
+        }
+      end
+      render json: data
     end
 
     def event
       event = @church_annex.events.find(params[:id])
+      data = {
+        id: event.id,
+        name: event.name,
+        event_type: event.event_type,
+        date: I18n.l(event.date, format: :long),
+        description: event.description,
+        church_annex: event.church_annex
+      }
 
-      render json: event
+      render json: data
     end
 
     def members
