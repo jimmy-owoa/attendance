@@ -45,7 +45,8 @@ module Api
         data << {
           id: user.id,
           name: "#{user.name} #{user.lastname}",
-          legal_number: user.legal_number
+          legal_number: user.legal_number,
+          temp: attendee.temperature
         }
       end
       render json: data
@@ -54,9 +55,9 @@ module Api
     def event_members
       data = []
       attendees = @event.attendees.pluck(:member_id)
-      members = @church_annex.members.where.not(id: attendees)
-      members.each do |member|
-        user = member.user
+      user_ids = @church_annex.members.where.not(id: attendees).pluck(:user_id)
+      users = User.where(id: user_ids).order(:name)
+      users.each do |user|
         data << {
           id: user.id,
           name: "#{user.name} #{user.lastname}",
