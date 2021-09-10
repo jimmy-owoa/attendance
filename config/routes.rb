@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get "events/:id/attendees", to: "church_annexes#attendees", on: :member
         get "events/:id/event_members", to: "church_annexes#event_members", on: :member
         post "events/:id/register_attendee", to: "church_annexes#register_attendee", on: :member
+        post "members", to: "church_annexes#create_member", on: :member
       end
       resources :churches
       resources :members

@@ -1,6 +1,6 @@
 module Api
   class V1::ChurchAnnexesController < V1Controller
-    before_action :set_church_annex, only: [:show, :update, :destroy, :events, :event, :members, :attendees, :register_attendee, :event_members]
+    before_action :set_church_annex, only: [:show, :update, :destroy, :events, :event, :members, :attendees, :register_attendee, :event_members, :create_member]
     before_action :set_event, only: [:attendees, :register_attendee, :event_members]
 
     # GET /church_annexes
@@ -130,6 +130,14 @@ module Api
       @church_annex.destroy
     end
 
+    def create_member
+      member = ChurchAnnex.add_member(user_params, @church_annex)
+      if member
+        render json: {message: "Member created", status: 200}
+      else
+        render json: {message: "Error", status: 200}
+      end
+    end
     private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -144,6 +152,16 @@ module Api
     # Only allow a list of trusted parameters through.
     def church_annex_params
       params.require(:church_annex).permit(:name, :address, :capacity, :enabled, :church_id, :slug)
+    end
+
+    def user_params
+      # params.require(:user).permit(:name, :lastname, :phone, :legal_number, :enabled)
+      { name: params[:name],
+      lastname: params[:lastname],
+      email: params[:email],
+      phone: params[:phone],
+      legal_number: params[:legal_number],
+      enabled: params[:enabled] }
     end
   end
 end
